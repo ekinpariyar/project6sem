@@ -133,6 +133,7 @@ CREATE TABLE `users` (
   `user_email` varchar(30) NOT NULL,
   `user_pass` varchar(20) NOT NULL,
   `user_weight` int(10) NOT NULL,
+  `user_height` int(10) NOT NULL,
   `user_age` int(10) NOT NULL,
   `user_contact` varchar(20) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
@@ -141,7 +142,7 @@ CREATE TABLE `users` (
 -- Dumping data for table `users`
 --
 
-INSERT INTO `users` (`user_id`, `user_name`, `user_email`, `user_pass`, `user_weight`, `user_age`, `user_contact`) VALUES
+INSERT INTO `users` (`user_id`, `user_name`, `user_email`, `user_pass`, `user_weight`, `user_height`,`user_age`, `user_contact`) VALUES
 (2, 'Abbas', 'moinabbas90@yahoo.com', '12345', 70, 25, '7212401'),
 (3, 'Moin', 'moinabbas80@gmail.com', '12345', 64, 23, '1111111');
 
@@ -217,3 +218,31 @@ COMMIT;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+<?php
+// Retrieve form data
+$date = $_POST['date'];
+$time = $_POST['time'];
+$task = $_POST['task'];
+$calories = $_POST['calories'];
+
+// Connect to the database
+$servername = 'your_servername';
+$username = 'your_username';
+$password = 'your_password';
+$dbname = 'your_database';
+
+$conn = new mysqli($servername, $username, $password, $dbname);
+
+// Check connection
+if ($conn->connect_error) {
+    die("Connection failed: " . $conn->connect_error);
+}
+
+// Prepare and execute the SQL statement to insert data into the database
+$stmt = $conn->prepare("INSERT INTO gym_tasks (date, time, task, calories) VALUES (?, ?, ?, ?)");
+$stmt->bind_param("sssi", $date, $time, $task, $calories);
+$stmt->execute();
+
+$stmt->close();
+$conn->close();
+?>

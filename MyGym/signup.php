@@ -67,6 +67,7 @@ include ("functions/functions.php");
 								 <input type="email" id="email" name="user_email" placeholder="Your email..">
 								 <input type="password" id="password" name="user_pass" placeholder="Your password..">
 								 <input type="text" id="weight" name="user_weight" placeholder="Your weight..">
+								 <input type="text" id="height" name="user_height" placeholder="Enter Your height in cm">
 								 <input type="text" id="age" name="user_age" placeholder="Your age..">
 								 <input type="text" id="contact" name="user_contact" placeholder="Your contact number..">
 								 <input type="submit" value="Submit" name="user_signup">
@@ -110,42 +111,44 @@ include ("functions/functions.php");
 //Sign Up Script Start
   if (isset($_POST['user_signup']))
   {
-    $user_name= ($_POST['user_name']);
-    $user_email= ($_POST['user_email']);
-    $user_password= ($_POST['user_pass']);
-    $user_weight= ($_POST['user_weight']);
-    $user_age= ($_POST['user_age']);
-    $user_contact= ($_POST['user_contact']);
-    
+    $user_name = $_POST['user_name'];
+$user_email = $_POST['user_email'];
+$user_password = $_POST['user_pass'];
+$user_weight = $_POST['user_weight'];
+$user_height = $_POST['user_height'];
+$user_age = $_POST['user_age'];
+$user_contact = $_POST['user_contact'];
+
 
     //Validations
-    if($user_name==''){
-      echo "<script>alert('Please fill out this field')</script>";
-      exit();
-    }
-    elseif ($user_email=='') {
-      echo "<script>alert('Please fill out this field')</script>";
-      exit();
-    }
-    elseif ($user_password=='') {
-      echo "<script>alert('Please fill out this field')</script>";
-      exit();
-    }
-    elseif ($user_weight=='') {
-      echo "<script>alert('Please fill out this field')</script>";
-      exit();
-    }
-    elseif ($user_age=='') {
-      echo "<script>alert('Please fill out this field')</script>";
-      exit();
-    }
-    elseif ($user_contact=='') {
-      echo "<script>alert('Please fill out this field')</script>";
-      exit();
-    }
+    if ($user_name == '') {
+		echo "<script>alert('Please fill out this field')</script>";
+		exit();
+	} elseif ($user_email == '') {
+		echo "<script>alert('Please fill out this field')</script>";
+		exit();
+	} elseif ($user_password == '') {
+		echo "<script>alert('Please fill out this field')</script>";
+		exit();
+	} elseif ($user_weight == '') {
+		echo "<script>alert('Please fill out this field')</script>";
+		exit();
+	} elseif ($user_height == '') {
+		echo "<script>alert('Please fill out this field')</script>";
+		exit();
+	} elseif ($user_age == '') {
+		echo "<script>alert('Please fill out this field')</script>";
+		exit();
+	} elseif ($user_contact == '') {
+		echo "<script>alert('Please fill out this field')</script>";
+		exit();
+	}
+
+    
     else{
-      $insert_user="INSERT INTO users(user_name, user_email,user_pass,user_weight,user_age,user_contact) VALUES('$user_name','$user_email','$user_password','$user_weight','$user_age','$user_contact')";
-      $run_user=mysqli_query($con, $insert_user);
+		$insert_user = "INSERT INTO users (user_name, user_email, user_pass, user_weight, user_height, user_age, user_contact) VALUES ('$user_name', '$user_email', '$user_password', '$user_weight', '$user_height', '$user_age', '$user_contact')";
+		$run_user = mysqli_query($con, $insert_user);
+		
       if ($run_user) {
         echo "<script>alert('Registered Seccussfully..')</script>";
       }

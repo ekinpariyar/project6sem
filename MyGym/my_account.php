@@ -34,6 +34,7 @@ include ("functions/functions.php");
 				<li><a href="index.php">Home</a></li>
 				<li><a href="my_account.php">My Account</a></li>
 				<li><a href="index.php">Contact Us</a></li>
+				<li><a href="records.php">Records</a></li> <!-- New line: Add the Records link here -->
 			</ul>
 
 			<div id="login-btn-signup">

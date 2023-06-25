@@ -35,7 +35,7 @@ include ("functions/functions.php");
 		<li><a href="index.php">Contact Us</a></li>
 		<?php
 		if ($_SESSION['user_email'] == true) {
-			echo '<li><a href="bmr_calculator.php">BMR Calculator</a></li>';
+			;
 		}
 		?>
 	</ul>
@@ -45,6 +45,7 @@ include ("functions/functions.php");
 	</div>
 </div>
 <!-- NavBar End -->
+
 		<!-- Content Start -->
 		<div class="content_wrapper">
 			<div id="left_sidebar">
