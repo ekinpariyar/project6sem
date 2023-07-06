@@ -5,6 +5,11 @@ include ("includes/db.php");
 include ("functions/functions.php");
 
 ?>
+<?php
+  if (isset($_SESSION['user_email'] )) {
+	  header('location: homepage.php');
+  } else{
+?>
 <html>
 <head>
 	<title>MyGym | Signup</title>
@@ -25,8 +30,8 @@ include ("functions/functions.php");
 		<div id="navbar">
 			<ul id="menu">
 				<li><a href="index.php">Home</a></li>
-				<li><a href="login.php">Login</a></li>
 				<li><a href="index.php">Contact Us</a></li>
+				<li><a href="login.php">Login</a></li>
 			</ul>
 
 			<div id="login-btn-signup">
@@ -70,6 +75,7 @@ include ("functions/functions.php");
 								 <input type="text" id="height" name="user_height" placeholder="Enter Your height in cm">
 								 <input type="text" id="age" name="user_age" placeholder="Your age..">
 								 <input type="text" id="contact" name="user_contact" placeholder="Your contact number..">
+								 <input type="number" id="targetedweight" name="targetedWeight" placeholder="Your target weight..">
 								 <input type="submit" value="Submit" name="user_signup">
 							</form>
 						</div>
@@ -89,6 +95,10 @@ include ("functions/functions.php");
 	<!-- Main Container End -->
 </body>
 </html>
+
+<?php
+  }
+?>
 
 <?php 
 	//Login Script Start
@@ -112,12 +122,13 @@ include ("functions/functions.php");
   if (isset($_POST['user_signup']))
   {
     $user_name = $_POST['user_name'];
-$user_email = $_POST['user_email'];
-$user_password = $_POST['user_pass'];
-$user_weight = $_POST['user_weight'];
-$user_height = $_POST['user_height'];
-$user_age = $_POST['user_age'];
-$user_contact = $_POST['user_contact'];
+	$user_email = $_POST['user_email'];
+	$user_password = $_POST['user_pass'];
+	$user_weight = $_POST['user_weight'];
+	$user_height = $_POST['user_height'];
+	$user_age = $_POST['user_age'];
+	$user_contact = $_POST['user_contact'];
+	$targeted_weight = $_POST['targetedWeight'];
 
 
     //Validations
@@ -146,7 +157,7 @@ $user_contact = $_POST['user_contact'];
 
     
     else{
-		$insert_user = "INSERT INTO users (user_name, user_email, user_pass, user_weight, user_height, user_age, user_contact) VALUES ('$user_name', '$user_email', '$user_password', '$user_weight', '$user_height', '$user_age', '$user_contact')";
+		$insert_user = "INSERT INTO users (user_name, user_email, user_pass, user_weight, user_height, user_age, user_contact , targeted_weight) VALUES ('$user_name', '$user_email', '$user_password', '$user_weight', '$user_height', '$user_age', '$user_contact' , '$targeted_weight' )";
 		$run_user = mysqli_query($con, $insert_user);
 		
       if ($run_user) {

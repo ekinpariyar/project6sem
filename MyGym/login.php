@@ -4,7 +4,7 @@ include ("includes/db.php");
 include ("functions/functions.php");
 
 // Login Script
-if (isset($_POST['user_login'])) {
+if (isset($_POST['submit_form'])) {
 	$user_email = $_POST['user_email'];
 	$user_password = $_POST['user_pass'];
 	
@@ -12,11 +12,11 @@ if (isset($_POST['user_login'])) {
 	$run_user = mysqli_query($con, $select_user);
 	$row_count = mysqli_num_rows($run_user);
 	
-	if ($row_count == 1) {
+	if ($row_count > 0) {
 	  $row = mysqli_fetch_assoc($run_user);
 	  $_SESSION['user_id'] = $row['user_id']; // Create session variable for user_id
 	  $_SESSION['user_email'] = $user_email; // Create session variable for user_email
-	  
+
 	  header('location: index.php');
 	  exit;
 	} else {
@@ -24,6 +24,12 @@ if (isset($_POST['user_login'])) {
 	}
   }
   
+?>
+
+<?php
+  if (isset($_SESSION['user_email'])) {
+	  header('location: homepage.php');
+  } else{
 ?>
 
 <html>
@@ -45,8 +51,8 @@ if (isset($_POST['user_login'])) {
     <div id="navbar">
       <ul id="menu">
         <li><a href="index.php">Home</a></li>
-        <li><a href="signup.php">Sign Up</a></li>
         <li><a href="index.php">Contact Us</a></li>
+        <li><a href="signup.php">Sign Up</a></li>
         <li><a href="index2.php">Admin login </a></li>
       </ul>
 
@@ -80,19 +86,18 @@ if (isset($_POST['user_login'])) {
           </div>
         </div>
         <!-- Product Display Box Start -->
-<div id="products_box" style="background-image: url(images/bg1.jpg)">
-  <div id="frm">
-      <h2 style="color:darkgrey; text-align: center;">Login</h2>
-      <form action="index.php" method="post"> <!-- Change the form action to index.php -->
-          <label for="fname">Username</label>
-          <input type="email" id="fname" name="user_email" placeholder="Your email..">
-          <label for="lname">Password</label>
-          <input type="password" id="lname" name="user_pass" placeholder="Your password..">
-          <input type="hidden" name="user_id" value="<?php echo $_SESSION['user_id']; ?>">
-          <input type="submit" value="Submit" name="submit_form"> <!-- Change the submit button name -->
-      </form>
-  </div>
-</div>
+      <div id="products_box" style="background-image: url(images/bg1.jpg)">
+        <div id="frm">
+            <h2 style="color:darkgrey; text-align: center;">Login</h2>
+            <form action="login.php" method="post"> <!-- Change the form action to index.php -->
+                <label for="fname">Email</label>
+                <input type="email" id="fname" name="user_email" placeholder="Your email..">
+                <label for="lname">Password</label>
+                <input type="password" id="lname" name="user_pass" placeholder="Your password..">
+                <input type="submit" value="Submit" name="submit_form"> <!-- Change the submit button name -->
+            </form>
+        </div>
+      </div>
 <!-- Product Display Box End -->
 
       </div>
@@ -109,3 +114,7 @@ if (isset($_POST['user_login'])) {
   <!-- Main Container End -->
 </body>
 </html>
+
+<?php
+  }
+?>

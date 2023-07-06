@@ -2,14 +2,15 @@
 
 session_start();
 
-if($_SESSION['user_email']==true){
-	}
-	else{
-		header('location: homepage.php');
-	}
-
 include ("includes/db.php");
 include ("functions/functions.php");
+?>
+
+
+<?php
+  if (isset($_SESSION['user_email'])) {
+	  header('location: index.php');
+  } else{
 ?>
 
 <html>
@@ -31,40 +32,26 @@ include ("functions/functions.php");
 <div id="navbar">
 	<ul id="menu">
 		<li><a href="index.php">Home</a></li>
-		<li><a href="my_account.php">My Account</a></li>
 		<li><a href="index.php">Contact Us</a></li>
 		<?php
-			if ($_SESSION['user_email'] == true) {
-		?>
-			<li><a href="records.php">Records</a></li> <!-- New line: Add the Records link here -->
+			if (isset($_SESSION['user_email'])) {
+			}else {
+		?>	
+				<li><a href="signup.php">Signup</a></li>
+				<li><a href="login.php">Login</a></li>
 		<?php
 			}
 		?>
 	</ul>
+		<div id="login-btn-signup">
+		</div>
 
-	<div id="login-btn-signup">
-		<li><a href="logout.php">Logout</a></li>
-	</div>
 </div>
 <!-- NavBar End -->
 
 		<!-- Content Start -->
 		<div class="content_wrapper">
-			<div id="left_sidebar">
-				<div id="sidebar_title">Days</div>
-				<ul id="days">
-					<?php  
-						getDays();
-					?>
-				</ul>
-
-				<div id="sidebar_title">Exercises</div>
-				<ul id="days">
-					<?php 
-						getExercise();
-					?>
-				</ul>
-			</div>
+    
 			<div id="right_content">
 				<div id="headline">
 					<div id="headline_content">
@@ -72,13 +59,8 @@ include ("functions/functions.php");
 					</div>
 				</div>
 					<!-- Product Display Box Start -->
-					<div id="products_box" style="background-image: url(images/bg2.jpg)">
-						<?php
-							get_All_Exercises();
-							get_Day_Exercises();
-							get_Exer_Exercises();
-						?>
-					</div>
+                <div id="products_box" style="background-image: url(images/bg1.jpg)">
+                </div>
 					<!-- Product Display Box End -->
 			</div>
 		</div>
@@ -94,3 +76,7 @@ include ("functions/functions.php");
 	<!-- Main Container End -->
 </body>
 </html>
+
+<?php
+  }
+?>

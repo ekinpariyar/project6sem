@@ -1,4 +1,4 @@
-++-- phpMyAdmin SQL Dump
+-- phpMyAdmin SQL Dump
 -- version 4.7.4
 -- https://www.phpmyadmin.net/
 --
@@ -218,31 +218,31 @@ COMMIT;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
-<?php
-// Retrieve form data
-$date = $_POST['date'];
-$time = $_POST['time'];
-$task = $_POST['task'];
-$calories = $_POST['calories'];
+-- <?php
+-- // Retrieve form data
+-- $date = $_POST['date'];
+-- $time = $_POST['time'];
+-- $task = $_POST['task'];
+-- $calories = $_POST['calories'];
 
-// Connect to the database
-$servername = 'your_servername';
-$username = 'your_username';
-$password = 'your_password';
-$dbname = 'your_database';
+-- // Connect to the database
+-- $servername = 'your_servername';
+-- $username = 'your_username';
+-- $password = 'your_password';
+-- $dbname = 'your_database';
 
-$conn = new mysqli($servername, $username, $password, $dbname);
+-- $conn = new mysqli($servername, $username, $password, $dbname);
 
-// Check connection
-if ($conn->connect_error) {
-    die("Connection failed: " . $conn->connect_error);
-}
+-- // Check connection
+-- if ($conn->connect_error) {
+--     die("Connection failed: " . $conn->connect_error);
+-- }
 
-// Prepare and execute the SQL statement to insert data into the database
-$stmt = $conn->prepare("INSERT INTO gym_tasks (date, time, task, calories) VALUES (?, ?, ?, ?)");
-$stmt->bind_param("sssi", $date, $time, $task, $calories);
-$stmt->execute();
+-- // Prepare and execute the SQL statement to insert data into the database
+-- $stmt = $conn->prepare("INSERT INTO gym_tasks (date, time, task, calories) VALUES (?, ?, ?, ?)");
+-- $stmt->bind_param("sssi", $date, $time, $task, $calories);
+-- $stmt->execute();
 
-$stmt->close();
-$conn->close();
-?>
+-- $stmt->close();
+-- $conn->close();
+-- ?>

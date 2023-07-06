@@ -76,7 +76,7 @@
     <label for="time">Time:</label>
     <input type="time" id="time" name="time" required>
 
-    <input type="text" id="calorie1" name="calories" value="" >
+    <input type="text" id="calorie1" name="calories" value="" hidden>
     
     <label for="task">Task:</label>
     <select id="task" name="task" required>
@@ -88,7 +88,7 @@
       <!-- Add more options as needed -->
     </select>
     
-    <input type="submit" value="Submit">
+    <input type="submit" value="Submit" name="submitRecord">
   </form>
   
   <div id="caloriesDisplay" style="display: none;">

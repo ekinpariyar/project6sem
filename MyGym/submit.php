@@ -1,12 +1,12 @@
 <?php
+
+session_start();
 // Retrieve form data
 $date = $_POST['date'];
 $time = $_POST['time'];
 $task = $_POST['task'];
-$calories = $_POST['calories'];
-$user_id = $_POST['user_id']; // Retrieve user_id from the form data
-
-// Rest of your code for database connection and insertion
+$calory = $_POST['calories'];
+$calories = (int)$calory;
 
 $user_id = $_SESSION['user_id']; // Retrieve user_id from the session variable
 
@@ -25,14 +25,17 @@ if ($conn->connect_error) {
 }
 
 // Prepare and execute the SQL statement to insert data into the database
-$stmt = $conn->prepare("INSERT INTO tasks (exercise_date, exercise_time, task, calories, user_id) VALUES (?, ?, ?, ?, ?)");
-$stmt->bind_param("sssis", $date, $time, $task, $calories, $user_id);
-$stmt->execute();
+// $stmt = $conn->prepare("INSERT INTO task (user_id,exercise_date, exercise_time, task, calories) VALUES (?, ?, ?, ?, ?)");
+// $stmt->bind_param($user_id ,$date, $time, $task, $calories);
+// $stmt->execute();
 
-$stmt->close();
-$conn->close();
+// $stmt->close();
+// $conn->close();
+
+$sql_ins = "INSERT INTO task (user_id, exercise_date, exercise_time ,task, calories) VALUES ('$user_id' ,'$date' , '$time', '$task', '$calories');";
+$result1 = mysqli_query($conn , $sql_ins);
 
 // Redirect to success page
-header("Location: success.html");
+header("Location: index.php");
 exit;
 ?>
